@@ -24,7 +24,7 @@ resource "aws_db_instance" "levelup-mariadb" {
   engine_version          = "10.4.8"
   instance_class          = "db.t2.micro"  # use micro if you want to use the free tier
   identifier              = "mariadb"
-  name                    = "mariadb"
+  db_name                 = "mariadb"
   username                = "root"           # username
   password                = "mariadb141"     # password
   db_subnet_group_name    = aws_db_subnet_group.mariadb-subnets.name
