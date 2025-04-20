@@ -8,7 +8,7 @@ resource "aws_db_subnet_group" "mariadb-subnets" {
 #RDS Parameters
 resource "aws_db_parameter_group" "levelup-mariadb-parameters" {
   name        = "levelup-mariadb-parameters"
-  family      = "mariadb10.4"
+  family      = "mariadb11.4"
   description = "MariaDB parameter group"
 
   parameter {
@@ -21,7 +21,7 @@ resource "aws_db_parameter_group" "levelup-mariadb-parameters" {
 resource "aws_db_instance" "levelup-mariadb" {
   allocated_storage       = 20             # 20 GB of storage
   engine                  = "mariadb"
-  engine_version          = "10.11.11"
+  engine_version          = "11.4.4"
   instance_class          = "db.t2.micro"  # use micro if you want to use the free tier
   identifier              = "mariadb"
   db_name                 = "mariadb"
@@ -29,7 +29,7 @@ resource "aws_db_instance" "levelup-mariadb" {
   password                = "mariadb141"     # password
   db_subnet_group_name    = aws_db_subnet_group.mariadb-subnets.name
   parameter_group_name    = aws_db_parameter_group.levelup-mariadb-parameters.name
-  multi_az                = "false"            # set to true to have high availability: 2 instances synchronized with each other
+  multi_az                = false            # set to true to have high availability: 2 instances synchronized with each other
   vpc_security_group_ids  = [aws_security_group.allow-mariadb.id]
   storage_type            = "gp2"
   backup_retention_period = 30                                          # how long you’re going to keep your backups
